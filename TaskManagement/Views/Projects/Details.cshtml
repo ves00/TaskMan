@@ -1,0 +1,68 @@
+﻿@model ProjectDetailsViewModel
+
+
+@if (@ViewBag.DeletedMessage != null)
+{
+    <h3 class="deletion-notification">@ViewBag.DeletedMessage</h3>
+}
+<a class="button-back" asp-action="Index"><i class="fas fa-chevron-left"></i><span>Go back</span></a>
+
+<section class="dashboard split-window">
+    <div class="window--left">
+        <div class="three-items">
+            <div class="three-items__item">Project-@Model.Project.ProjectId</div>
+            <div class="three-items__item"><h4>@Model.Project.ProjectName</h4></div>
+            <div class="three-items__item">
+                <div class="add-project">
+                    <a asp-controller="Tasks" asp-action="Create" asp-route-id="@Model.Project.ProjectId" class="add-button"><i class="fas fa-plus"></i></a>
+                    <div>New task</div>
+                </div>
+            </div>
+        </div>
+
+        <ul class="task-box">
+            @{int i = 1;}
+            @foreach (TaskManagement.Models.Task t in Model.Tasks)
+            {
+                <li class="task-box__item">
+                    <span>
+                        <a class="task-box__item--button" asp-controller="Tasks"
+                           asp-action="Details"
+                           asp-route-id="@t.TaskId">Task<span> @i</span>:<span>&nbsp; @t.TaskName</span></a>
+                    </span>
+                    @if (t.TaskTaskStateId == 6)
+                    {
+                        <i title="Done" class="task-done fas fa-check"></i>
+                        <a class="delete-task" asp-controller="Tasks"
+                           asp-action="Delete"
+                           asp-route-id="@t.TaskId">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="delete-task not-finished" asp-controller="Tasks"
+                           asp-action="Delete"
+                           asp-route-id="@t.TaskId">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    }
+                </li>
+                i++;
+            }
+        </ul>
+    </div>
+    <div class="window--right">
+        <ul class="information-box">
+            <li>Deadline: @Model.Project.ProjectDeadline</li>
+            <li>Description: @Model.Project.ProjectDescription</li>
+            @await Html.PartialAsync("_CommentSection", Model.Comments)
+
+            @await Component.InvokeAsync("CommentCreate", new {
+               id = Model.Project.ProjectId,
+               commentOn = "Project"
+            })
+
+        </ul>
+    </div>
+</section>

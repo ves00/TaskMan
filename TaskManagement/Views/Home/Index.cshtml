@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+@model TaskManagement.Models.Account
+@if (@Context.Session.GetString("Username") != null)
+{
+    <h2 class="main-title login-screen">@Context.Session.GetString("Username"), enjoy your time on TaskMan!</h2>
+}
+else
+{
+    <h2 class="main-title">Welcome to TaskMan</h2>
+    <div class="login-screen">
+        <div class="error-box error-bounce">@ViewBag.error</div>
+        <form asp-controller="Home" asp-action="Login" method="post">
+            @if (ViewBag.Unlogged != null)
+            {
+                <div class="unlogged-notification deletion-notification">@ViewBag.Unlogged</div>
+            }
+            <input class="login-input" asp-for="AccountEmail" type="text" placeholder="Email" />
+            <br />
+            <input class="login-input" asp-for="AccountPassword" type="password" placeholder="Password">
+            <br />
+            <input class="login-input submit" type="submit" value="Submit" />
+        </form>
+    </div>
+}
+
+<ul class="bg-bubbles">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>

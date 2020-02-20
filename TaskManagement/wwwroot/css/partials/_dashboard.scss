@@ -1,0 +1,127 @@
+﻿.dashboard {
+    max-width: 1170px;
+    margin: 20px auto;
+    box-sizing: border-box;
+    background: rgb(255, 255, 255, 10%);
+    padding: 15px;
+    border-radius: 25px;
+}
+
+.progress {
+    width: 100%;
+    height: 10px;
+    border-radius: 25px;
+}
+
+.progress-wrap {
+    margin: 20px 0;
+    overflow: hidden;
+    position: relative;
+
+    .progress-bar {
+        width: 0%;
+        background: #ddd;
+        left: 0;
+        position: absolute;
+        top: 0;
+        border-radius: 0px;
+        transition: width 1.2s ease-in-out;
+    }
+}
+
+.split-window {
+    display: flex;
+
+    .window--left, .window--right {
+        flex-basis: 50%;
+    }
+
+    .information-box {
+        list-style: none;
+        padding: 0;
+
+        li {
+            margin: 10px 0;
+            color: white;
+        }
+    }
+}
+
+.two-items {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.three-items {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    width: 95%;
+
+    .three-items__item {
+        margin: 0 10px;
+    }
+
+    .add-project {
+        margin: 0 10px;
+    }
+
+    .add-button {
+        padding: 10px;
+        margin: 5px;
+
+        i {
+            font-size: 13pt;
+        }
+    }
+}
+
+.task-box {
+    list-style: none;
+    padding: 0;
+    width: 90%;
+    margin: 20px 10px;
+
+    .task-box__item {
+        display: flex;
+        align-items: center;
+        padding: 0 5px;
+        background-color: rgba(255,255,255, 30%);
+        margin: 12px 0;
+        border-radius: 0 25px 25px 0;
+
+        .task-box__item--button {
+            padding: 10px 30px 10px 10px;
+            color: white;
+            display: block;
+
+            &:hover {
+                color: rgba($purple, 70%);
+                text-decoration: none;
+            }
+        }
+
+        .delete-task {
+            padding: 8px 10px;
+        }
+
+        .task-done {
+            padding: 8px;
+            margin-left: auto;
+            color: $success-green;
+        }
+
+        .not-finished {
+            margin-left: auto;
+        }
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .split-window {
+        flex-direction: column;
+    }
+}
